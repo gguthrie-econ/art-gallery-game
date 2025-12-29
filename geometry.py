@@ -1,7 +1,6 @@
-from shapely.geometry import GeometryCollection, LineString, MultiPoint, Point, Polygon, box
-import numpy as np
+import numpy as np 
+from shapely.geometry import Point, MultiPoint, LineString, Polygon, box, GeometryCollection
 
-# FUTURE: Add random seed as an optional argument to this function.
 
 rng = np.random.default_rng()
 
@@ -29,15 +28,6 @@ def generate_floor_plan(num_rooms: int, min_overlap: float, dx: float, dy: float
         rooms = rooms.union(room)
 
     return Polygon(rooms.exterior)
-
-
-def default_floor_plan() -> Polygon:
-    """
-    Generates a polygon representing the default floor plan of the art gallery.
-    """
-    floor_plan = Polygon([(-1, -1), (2, -1), (2, 0), (1, 0), (1, 1), (2, 1), (2, 3), (0, 3), (0, 2), \
-    (-1, 2), (-1, 0.5), (-0.5, 0.5), (-0.5, 0), (-1, 0), (-1, -1)])
-    return floor_plan
 
 def boundary_points(floor_plan: Polygon, padding: float, n_points: int) -> list[Point]:
     """
@@ -129,5 +119,3 @@ def visibility_polygon(guard: Point, floor_plan: Polygon, boundary_points: list[
 
     # Create the Polygon
     return Polygon(coords)
-
-
